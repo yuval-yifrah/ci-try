@@ -1,22 +1,10 @@
 pipeline {
-  agent any
-
-  stages {
-    stage('Docker Inspect') {
-      steps {
-        sh 'docker inspect -f . maven:3.9.11-eclipse-temurin-21-alpine'
-      }
-    }
-
-    stage('Build with Maven') {
-      agent {
-        docker {
-          image 'maven:3.9.11-eclipse-temurin-21-alpine'
+    agent { docker { image image 'maven:3.9.6-eclipse-temurin-21-alpine' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+            }
         }
-      }
-      steps {
-        sh 'mvn clean install'
-      }
     }
-  }
 }
