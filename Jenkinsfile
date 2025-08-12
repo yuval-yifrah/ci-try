@@ -1,9 +1,9 @@
 pipeline {
-    agent { docker { image 'python:3.13.6-alpine3.22' } }
+    agent any
     stages {
-        stage('build') {
+        stage('Check Docker') {
             steps {
-                sh 'python --version'
+                sh 'docker version'
             }
         }
     }
